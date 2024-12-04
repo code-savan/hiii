@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function Home() {
   const [isClicked, setIsClicked] = useState(false);
-  const [userName, setUserName] = useState(""); // Name in the URL
+  const [userName, setUserName] = useState(""); // Name in the
   const [newName, setNewName] = useState(""); // Name entered in the form
 
   // Extract the name from the query parameters
