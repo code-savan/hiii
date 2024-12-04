@@ -2,20 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+*{
+    margin: 0;
+    padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+/* Basic Modal */
+.doors-container {
+    display: flex;
+    justify-content: center; /* Center the doors horizontally */
+    height: 100vh;
+  align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+  }
+
+  .door {
+    width: 50%;
+    height: 100%;
+    transition: all 1s ease-in-out; /* Smooth transition for the door animation */
+  }
+
+  .door-left {
+    background-color: red;
+    transform-origin: right;
+    transform: skewX(0deg);
+  }
+
+  .door-right {
+    background-color: blue;
+    transform-origin: left;
+    transform: skewX(0deg);
+  }
+
+  /* Open door animation */
+  .doors-container.open .door-left {
+    transform: translateX(-100%);
+  }
+
+  .doors-container.open .door-right {
+    transform: translateX(100%);
+  }
+
+  /* Button animation (fade when clicked) */
+  button {
+    z-index: 20; /* Ensure button stays on top */
+    transition: opacity 0.5s ease-out;
+  }
+
+  button:focus {
+    outline: none;
+  }
