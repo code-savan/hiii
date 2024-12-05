@@ -11,8 +11,11 @@ const poppins = Poppins({
 
 
 export const metadata = {
-    title: "❤️ Someone Special wishing you a Merry Christmas",
+    title: "Someone Special wishing you a Merry Christmas",
     description: "Celebrate the joy of Christmas with heartfelt wishes!",
+    icons: {
+        icon: "/favicon.png",
+      },
   };
 
 export default function RootLayout({ children }) {
@@ -21,6 +24,7 @@ export default function RootLayout({ children }) {
       <body
         className={poppins.className}
       >
+
         {children}
       </body>
     </html>

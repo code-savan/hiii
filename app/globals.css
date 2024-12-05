@@ -9,9 +9,89 @@
 
 
 body {
-
-  font-family: Arial, Helvetica, sans-serif;
+font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+@keyframes scale-rotate {
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+    20% {
+      transform: scale(1.2) rotate(-5deg);
+    }
+    40% {
+      transform: scale(1.2) rotate(5deg);
+    }
+    60% {
+      transform: scale(1.2) rotate(-5deg);
+    }
+    80% {
+      transform: scale(1.2) rotate(5deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  .animate-scale-rotate {
+    animation: scale-rotate 2.2s ease-in-out infinite;
+  }
+
+
+  @keyframes author {
+    0% {
+      transform: rotate(0deg);
+    }
+    20% {
+      transform: rotate(-8deg);
+    }
+    40% {
+      transform: rotate(8deg);
+    }
+    60% {
+      transform: rotate(-8deg);
+    }
+    80% {
+      transform:rotate(8deg);
+    }
+    100% {
+      transform:rotate(0deg);
+    }
+  }
+
+  .animate-author {
+    animation: author 3s ease-in-out infinite;
+    font-family:  sans-serif;
+  }
+
+
+
+  @keyframes gradient-dance {
+    0% {
+      background-position: 0% 50%;
+    }
+    25% {
+      background-position: 50% 0%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    75% {
+      background-position: 50% 100%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .gradient-text {
+    background-image: url('/glitter.gif');
+    background-size: 300% 300%; /* Ensures a large gradient for animation */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Makes the background gradient visible through the text */
+    /* animation: gradient-dance 2s ease-in-out infinite; */
+  }
+
 
 
 
@@ -27,6 +107,8 @@ body {
     right: 0;
     bottom: 0;
     z-index: 5;
+    background-image: url("/open.webp");
+    background-size: cover;
   }
 
   .door {
@@ -36,15 +118,21 @@ body {
   }
 
   .door-left {
-    background-color: red;
+    background-color: black;
     transform-origin: right;
     transform: skewX(0deg);
+    background-image: url("/curtain.png");
+    background-size: cover;
+    border-right: solid 2px black;
   }
 
   .door-right {
-    background-color: blue;
+    background-color: white;
     transform-origin: left;
     transform: skewX(0deg);
+    background-image: url("/curtain.png");
+    background-size: cover;
+    border-left: solid 2px black;
   }
 
   /* Open door animation */
@@ -64,4 +152,86 @@ body {
 
   button:focus {
     outline: none;
+  }
+
+
+
+
+
+
+
+
+
+
+  .icon-slider {
+    overflow: hidden;
+    width: fit-content;
+    height: 100%;
+  }
+
+  .icon-list {
+    display: flex;
+    flex-direction: column;
+    animation: slide 30s linear infinite;
+    height: 100%;
+  }
+
+  .icon-listR {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: slideR 30s linear infinite;
+    height: 100%;
+  }
+
+  .icon-list li, .icon-listR li {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 70%;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+
+  @keyframes slideR {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+
+
+
+  .arrow-icon {
+
+    animation: pulse-animation 2s ease-in-out infinite; /* Define the animation */
+  }
+
+
+  @keyframes pulse-animation {
+    0% {
+      transform: translateY(0) rotate(-45deg); /* Initial state */
+    }
+    25% {
+      transform: translateY(-10px) rotate(-45deg); /* Scale up and move up a little */
+    }
+    50% {
+      transform: translateY(10px) rotate(-45deg); /* Keep scaled and move up */
+    }
+    75% {
+      transform: translateY(-10px) rotate(-45deg); /* Keep scaled and move up */
+    }
+    100% {
+      transform: translateY(0px) rotate(-45deg); /* Keep scaled and move up */
+    }
+
   }
