@@ -5,58 +5,21 @@ import axios from "axios";
 import Image from "next/image";
 import Head from 'next/head';
 import AnimatedSidebar from "./components/AnimatedSidebar";
+import CountdownTimer from "./components/CountdownTimer";
+import AudioToggle from "./components/AudioToggle";
+import GenerateLinkForm from "./components/GenerateLinkForm";
 
-// import Loader from "./components/Loader";
 
 export default function Home() {
   const [isClicked, setIsClicked] = useState(false); // Manage loader visibility
   const [userName, setUserName] = useState(""); // Name in the query parameters
   const [newName, setNewName] = useState(""); // Name entered in the form
   const [isDoorOpen, setIsDoorOpen] = useState(false);
-  const [countdown, setCountdown] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+  const [musicPlaying, setMusicPlaying] = useState(false); // State for music play/pause
 
-  const [isPlaying, setIsPlaying] = useState(false); // Track if the audio is playing
-  const audioRef = useRef(null);
 
-  const handleToggleAudio = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause(); // Pause the audio
-      } else {
-        audioRef.current.play(); // Play the audio
-      }
-      setIsPlaying(!isPlaying); // Toggle the play state
-    }
-  };
 
-  // Calculate time until Christmas
-  useEffect(() => {
-    const calculateCountdown = () => {
-      const now = new Date();
-      const christmas = new Date(now.getFullYear(), 11, 25); // December 25th
-      if (now > christmas) {
-        christmas.setFullYear(christmas.getFullYear() + 1); // Adjust for next year if past Christmas
-      }
-      const diff = christmas - now;
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      setCountdown({ days, hours, minutes, seconds });
-    };
-
-    calculateCountdown();
-    const interval = setInterval(calculateCountdown, 1000);
-
-    return () => clearInterval(interval); // Clean up interval on component unmount
-  }, []);
 
   // Extract the name from the query parameters
   useEffect(() => {
@@ -70,38 +33,45 @@ export default function Home() {
     }
   }, []);
 
-  const handleGenerateLink = (e) => {
+  const handleGenerateLink = async (e) => {
     e.preventDefault();
     if (newName.trim()) {
-      const link = `${window.location.origin}?name=${encodeURIComponent(newName)}`;
-      navigator.clipboard.writeText(link);
-      alert("Your link has been copied to the clipboard!");
+      const customMessage = `🎁 Have you seen this??? ${newName} sends you a surprise message 🎉 Open this 👉 ${window.location.origin}?name=${encodeURIComponent(newName)} 🎄`;
+
+      try {
+        await navigator.clipboard.writeText(customMessage);
+        alert("Your message has been copied to the clipboard!");
+      } catch (error) {
+        console.error("Failed to copy text:", error);
+        alert("Could not copy the message. Please try again.");
+      }
+
+
+      // 2. Share to WhatsApp
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(customMessage)}`;
+      window.open(whatsappUrl, "_blank");
+
       setNewName("");
     }
   };
 
-//   const handleLoaderClick = () => {
-//     setIsClicked(true); // Update the state when the loader button is clicked
-//   };
+  const toggleMusic = () => {
+    setMusicPlaying((prevState) => !prevState);
+  };
+
 
   const handleClick = () => {
-      setIsDoorOpen(true); // Trigger door opening
-
-      setTimeout(() => {
-          // Delay for transition to start
-          setIsClicked(true); // Start the animation
-          if (audioRef.current) {
-            audioRef.current.play(); // Play audio when clicked
-          }
-        }, 1000);
+    setIsDoorOpen(true);
+    setTimeout(() => setIsClicked(true), 1000);
   };
 
   return (
     <>
     <Head>
-        <title>{userName} wishing you a Merry Christmas</title>
-        <meta name="description" content="Celebrate the joy of Christmas with heartfelt wishes!" />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+    <title>{userName} wishing you a Merry Christmas</title>
+    <meta name="description" content={`${userName} is spreading Christmas cheer with heartfelt wishes!`} />
+    <meta property="og:title" content={`${userName} wishing you a Merry Christmas`} />
+    <meta property="og:description" content={`${userName} is spreading Christmas cheer with heartfelt wishes!`} />
       </Head>
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#fff]">
       {/* Loading Screen */}
@@ -134,22 +104,8 @@ export default function Home() {
 
             </div> */}
            {/* Hidden audio element */}
-        <audio
-          ref={audioRef}
-          src="/4.mp3"
-          loop
-          autoPlay
-          preload="auto"
-        ></audio>
-
-        {/* Floating button */}
-        <button
-          onClick={handleToggleAudio}
-          className="fixed bottom-16 right-2 bg-gray-300 text-white rounded-full px-4 py-3 shadow-lg hover:bg-red-600 transition z-50"
-          aria-label="Toggle audio"
-        >
-          {isPlaying ? "🔇" : "🔊"}
-        </button>
+       <AudioToggle audioSrc="/4.mp3" isPlaying={musicPlaying}
+              onToggle={toggleMusic} />
 
         {/* fireworks  */}
         <Image src="/stars.gif" alt="wishing you"  className="w-[100px] md:w-[300px] fixed left-10 z-0" width={500} height={500} />
@@ -180,17 +136,7 @@ export default function Home() {
              <Image src="/merry2.png" alt="wishing you"  className="w-[280px] md:w-[380px] animate-scale-rotate" width={500} height={500} />
             </div>
 
-            <p className="font-bold text-[20px] my-6">
-            <span className="text-blue-500">{countdown.days} </span>{" "}
-            <span className="text-green-500">Day,</span>{" "}
-            <span className="text-blue-500">{countdown.hours}</span>{" "}
-            <span className="text-pink-500">Hrs,</span>{" "}
-            <span className="text-blue-500">{countdown.minutes}</span>{" "}
-            <span className="text-green-500">min,</span> <br />
-            <span className="text-blue-500">{countdown.seconds}</span>{" "}
-            <span className="text-purple-500">Sec</span>{" "}
-            <span className="text-orange-500">Before</span>
-          </p>
+            <CountdownTimer />
 
             <div className="mx-auto mb-8 w-full md:w-fit flex justify-center ">
              <Image src="/guiter.gif" alt="wishing you" className="w-[42%] md:w-[200px] " unoptimized width={400} height={400} />
@@ -214,7 +160,7 @@ export default function Home() {
 
 
           {/* Form to Generate New Links */}
-          <form onSubmit={handleGenerateLink} className="w-full z-40 flex items-center fixed bottom-0 md:space-x-3  left-1/2 -translate-x-1/2">
+          {/* <form onSubmit={handleGenerateLink} className="w-full z-40 flex items-center fixed bottom-0 md:space-x-3  left-1/2 -translate-x-1/2">
             <input
               type="text"
               placeholder="Enter your name here..."
@@ -228,7 +174,8 @@ export default function Home() {
             >
             ‮O‮G👉
             </button>
-          </form>
+          </form> */}
+          <GenerateLinkForm onSubmit={handleGenerateLink} newName={newName} setNewName={setNewName} />
         </main>
       )}
     </div>

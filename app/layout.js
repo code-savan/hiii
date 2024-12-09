@@ -11,10 +11,10 @@ const poppins = Poppins({
 
 
 export const metadata = {
-    title: "Someone Special wishing you a Merry Christmas",
+    title: "Someone Special has a surprise for youuu!",
     description: "Celebrate the joy of Christmas with heartfelt wishes!",
     icons: {
-        icon: "/favicon.png",
+        icon: "/logo.png",
       },
   };
 
