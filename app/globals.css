@@ -172,7 +172,7 @@ font-family: Georgia, 'Times New Roman', Times, serif;
   .icon-list {
     display: flex;
     flex-direction: column;
-    animation: slide 30s linear infinite;
+    animation: slide 20s linear infinite;
     height: 100%;
   }
 
@@ -180,7 +180,7 @@ font-family: Georgia, 'Times New Roman', Times, serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    animation: slideR 30s linear infinite;
+    animation: slideR 20s linear infinite;
     height: 100%;
   }
 

@@ -4,8 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Head from 'next/head';
-import LeftSlider from "./components/LeftSlider";
-import RightSlider from "./components/RightSlider";
+import AnimatedSidebar from "./components/AnimatedSidebar";
 
 // import Loader from "./components/Loader";
 
@@ -137,7 +136,7 @@ export default function Home() {
            {/* Hidden audio element */}
         <audio
           ref={audioRef}
-          src="/background-music.mp3"
+          src="/4.mp3"
           loop
           autoPlay
           preload="auto"
@@ -146,7 +145,7 @@ export default function Home() {
         {/* Floating button */}
         <button
           onClick={handleToggleAudio}
-          className="fixed bottom-28 right-2 bg-gray-200 text-white rounded-full px-4 py-3 shadow-lg hover:bg-red-600 transition z-50"
+          className="fixed bottom-16 right-2 bg-gray-300 text-white rounded-full px-4 py-3 shadow-lg hover:bg-red-600 transition z-50"
           aria-label="Toggle audio"
         >
           {isPlaying ? "🔇" : "🔊"}
@@ -154,25 +153,34 @@ export default function Home() {
 
         {/* fireworks  */}
         <Image src="/stars.gif" alt="wishing you"  className="w-[100px] md:w-[300px] fixed left-10 z-0" width={500} height={500} />
-        <Image src="/stars.gif" alt="wishing you"  className="w-[100px] md:w-[300px] fixed right-5 bottom-10 z-0" width={500} height={500} />
+        <Image src="/stars.gif" alt="wishing you"  className="w-[100px] md:w-[300px] fixed right-5 top-10 md:bottom-10 z-0" width={500} height={500} />
 
         <div className="w-[30px] md:w-[50px] h-[100dvh] fixed left-0 top-0">
-        <LeftSlider />
+        {/* <LeftSlider /> */}
+        <AnimatedSidebar side="left" direction="up" />
         </div>
-        <div className="w-[30px] md:w-[50px] h-[100dvh] fixed right-0 top-0">
-        <RightSlider />
+        <div className="w-[30px] md:w-[40px] h-[100dvh] fixed right-0 top-0">
+        {/* <RightSlider /> */}
+        <AnimatedSidebar side="right" direction="down" />
         </div>
 
 <div className=" relative z-30">
 
 
           <div className="text-[28px] md:text-[35px] font-bold text-red-600 my-6 animate-author">
-           <span>🎁</span> <span className="gradient-text">{userName}</span>
+           <span>🎁</span> <span className="gradient-text">{userName} is</span>
           </div>
-          <div className="mx-auto mb-4 w-fit">
+          <div className="mx-auto my-6 w-fit">
              <Image src="/wishing.gif" alt="wishing you" unoptimized className="w-[150px] md:w-[180px] animate-scale-rotate" width={100} height={100} />
             </div>
-            <p className="font-bold text-[20px] mb-6">
+
+
+
+          <div className="mx-auto mb-8 md:mb-4 w-fit">
+             <Image src="/merry2.png" alt="wishing you"  className="w-[280px] md:w-[380px] animate-scale-rotate" width={500} height={500} />
+            </div>
+
+            <p className="font-bold text-[20px] my-6">
             <span className="text-blue-500">{countdown.days} </span>{" "}
             <span className="text-green-500">Day,</span>{" "}
             <span className="text-blue-500">{countdown.hours}</span>{" "}
@@ -184,20 +192,16 @@ export default function Home() {
             <span className="text-orange-500">Before</span>
           </p>
 
-          <div className="mx-auto mb-8 md:mb-4 w-fit">
-             <Image src="/merry2.png" alt="wishing you"  className="w-[280px] md:w-[380px] animate-scale-rotate" width={500} height={500} />
-            </div>
-
             <div className="mx-auto mb-8 w-full md:w-fit flex justify-center ">
              <Image src="/guiter.gif" alt="wishing you" className="w-[42%] md:w-[200px] " unoptimized width={400} height={400} />
              <Image src="/sax.gif" alt="wishing you" className="w-[42%] md:w-[200px] " unoptimized width={400} height={400} />
             </div>
 
-            <div className="text-center mx-auto w-full font-semibold text-[13px] md:text-[18px] px-6 space-y-2 md:space-y-1">
-                <p className="text-red-500 shadow-">😍Have a cheerful Christmas😍</p>
+            <div className="text-center mx-auto w-[94%] md:w-full font-semibold text-[15px] md:text-[18px] px-6 space-y-2 md:space-y-1">
+                <p className="text-red-500">😍Have a cheerful Christmas😍</p>
                 <p className="text-orange-500">🎅🏻May the warmth of love and joy🎅🏻</p>
-                <p className="text-purple-500">❤️Fill your heart and home, today and always❤️</p>
-                <p className="text-slate-700">✨This season is a reminder that you are loved✨</p>
+                <p className="text-teal-500">❤️Fill your heart and home, today and always❤️</p>
+                <p className="text-slate-600">✨This season is a reminder that you are loved✨</p>
                 <p className="text-green-500">🎄In the smiles shared, in the kindness given🎄</p>
                 <p className="text-blue-500">🎅May your New Year shine brighter than stars🎅</p>
                 <p className="text-yellow-500">🎉Merry Christmas and a Blessed New Year🎉</p>
@@ -210,19 +214,19 @@ export default function Home() {
 
 
           {/* Form to Generate New Links */}
-          <form onSubmit={handleGenerateLink} className="w-full md:w-fit z-40 md:flex items-center fixed bottom-2 md:space-x-3  space-y-1 md:space-y-0 left-1/2 -translate-x-1/2">
+          <form onSubmit={handleGenerateLink} className="w-full z-40 flex items-center fixed bottom-0 md:space-x-3  left-1/2 -translate-x-1/2">
             <input
               type="text"
               placeholder="Enter your name here..."
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
-              className="border-2 p-3 w-full md:w-80 rounded bg-purple-500 placeholder:text-gray-200 text-center text-white border-pink-500"
+              className="border-2 p-3 w-[65%] md:w-[75%] rounded-[10px] bg-purple-500 placeholder:text-gray-200 text-center text-white border-pink-500 animate-scaleSequence"
             />
             <button
               type="submit"
-              className="bg-pink-500 text-white px-6 py-3 rounded-lg border-[3px] w-full md:w-auto border-purple-500"
+              className="bg-pink-500 text-white px-3 md:px-8 py-3 rounded-[10px] border-[3px] w-[35%] md:w-[25%] border-purple-500 animate-scaleSequence"
             >
-            ‮ OOO‮G👉
+            ‮O‮G👉
             </button>
           </form>
         </main>
