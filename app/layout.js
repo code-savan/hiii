@@ -21,6 +21,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+         <head>
+         <meta name="monetag" content="b5ead84b3bbf0975bfd1279582b8b44c" />
+      </head>
       <body
         className={poppins.className}
       >
