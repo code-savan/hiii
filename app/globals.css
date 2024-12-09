@@ -88,6 +88,7 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-image: url('/glitter.gif');
     background-size: 300% 300%; /* Ensures a large gradient for animation */
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent; /* Makes the background gradient visible through the text */
     /* animation: gradient-dance 2s ease-in-out infinite; */
   }

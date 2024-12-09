@@ -22,6 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
          <head>
+         <script src="https://alwingulla.com/88/tag.min.js" data-zone="118765" async data-cfasync="false"></script>
          <meta name="monetag" content="b5ead84b3bbf0975bfd1279582b8b44c" />
       </head>
       <body
