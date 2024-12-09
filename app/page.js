@@ -48,7 +48,7 @@ export default function Home() {
 
 
       // 2. Share to WhatsApp
-      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(customMessage)}`;
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(customMessage)}`;
       window.open(whatsappUrl, "_blank");
 
       setNewName("");
