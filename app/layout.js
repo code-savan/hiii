@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Poppins } from "next/font/google";
-import Head from "next/head";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -19,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         {/* Add monetag script and meta tag */}
         <script
           type="text/javascript"
@@ -29,7 +28,7 @@ export default function RootLayout({ children }) {
           data-cfasync="false"
         ></script>
         <meta name="monetag" content="b5ead84b3bbf0975bfd1279582b8b44c" />
-      </Head>
+      </head>
       <body className={poppins.className}>
         {children}
       </body>
