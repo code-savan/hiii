@@ -52,7 +52,7 @@ useEffect(() => {
 
       try {
         await navigator.clipboard.writeText(customMessage);
-        alert("Your message has been copied to the clipboard!");
+        alert("Your message has been copied!!! Share to Friends NOW!!!");
       } catch (error) {
         console.error("Failed to copy text:", error);
         alert("Could not copy the message. Please try again.");
@@ -81,8 +81,8 @@ useEffect(() => {
     <>
     <Head>
     <title>{userName} has a surprise for youuu!</title>
-    <meta name="description" content={`${userName} is spreading Christmas cheer with heartfelt wishes!`} />
-    <meta property="og:title" content={`${userName} wishing you a Merry Christmas`} />
+    <meta name="description" content={`${userName} has a surprise for youuu!!`} />
+    <meta property="og:title" content={`${userName} has a surprise for youuu!`} />
     <meta property="og:description" content={`${userName} is spreading Christmas cheer with heartfelt wishes!`} />
       </Head>
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#fff]">
