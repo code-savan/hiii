@@ -48,7 +48,7 @@ useEffect(() => {
   const handleGenerateLink = async (e) => {
     e.preventDefault();
     if (newName.trim()) {
-      const customMessage = `🎁 Have you seen this??? ${newName} sends you a surprise message 🎉 Open this 👉 ${window.location.origin}?name=${encodeURIComponent(newName)} 🎄`;
+      const customMessage = `🎁🎁🎁 Have you seen this??? ${newName} sends you a surprise message 🎉🎉🎉 Open this 👉 ${window.location.origin}?name=${encodeURIComponent(newName)} 🎄`;
 
       try {
         await navigator.clipboard.writeText(customMessage);
@@ -113,7 +113,7 @@ useEffect(() => {
         // Main Wishes Section
         <main className="text-center w-full h-dvh overflow-y-auto relative pb-[100px]">
             {/* <a href="https://luglawhaulsano.net/4/7441732" className="h-[80px] w-[300px] mx-auto mb-2">
-                
+
             </a> */}
            {/* Hidden audio element */}
        <AudioToggle audioSrc="/4.mp3" isPlaying={musicPlaying}
