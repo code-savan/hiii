@@ -22,16 +22,28 @@ export default function Home() {
 
 
   // Extract the name from the query parameters
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get("name") || "Someone Special";
-    setUserName(name);
+//   useEffect(() => {
+//     const params = new URLSearchParams(window.location.search);
+//     const name = params.get("name") || "Someone Special";
+//     setUserName(name);
 
-    // Track the visit
-    if (name) {
-      axios.post("/api/track", { name });
+//     // Track the visit
+//     if (name) {
+//       axios.post("/api/track", { name });
+//     }
+//   }, []);
+useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get("name") || "Someone Special";
+      setUserName(name);
+
+      if (name) {
+        axios.post("/api/track", { name });
+      }
     }
   }, []);
+
 
   const handleGenerateLink = async (e) => {
     e.preventDefault();
@@ -68,7 +80,7 @@ export default function Home() {
   return (
     <>
     <Head>
-    <title>{userName} wishing you a Merry Christmas</title>
+    <title>{userName} has a surprise for youuu!</title>
     <meta name="description" content={`${userName} is spreading Christmas cheer with heartfelt wishes!`} />
     <meta property="og:title" content={`${userName} wishing you a Merry Christmas`} />
     <meta property="og:description" content={`${userName} is spreading Christmas cheer with heartfelt wishes!`} />
@@ -83,7 +95,7 @@ export default function Home() {
 
         {/* CLCIKKKKKK  */}
           <Image onClick={handleClick}
-          src="/click.png" alt="click" className="mt-28 z-20 animate-scale-rotate cursor-pointer" width={150} height={150} />
+          src="/click.png" alt="click" className="mt-28 z-20 animate-scale-rotate cursor-pointer w-auto h-auto" width={150} height={150} />
         </div>
         <div
           className={`doors-container  ${
@@ -91,8 +103,8 @@ export default function Home() {
           }`}
         >
           <div className="door door-left">
-          <Image src="/arrow.png" alt="hide" className="absolute right-16 z-40 top-[42%] translate-y-1/2  arrow-icon" width={50} height={50} />
-            <Image src="/hide.png" alt="hide" className="absolute -right-5 z-40 bottom-1/2 " width={150} height={150} />
+          <Image src="/arrow.png" alt="arrow" className="absolute right-16 z-40 top-[42%] translate-y-1/2  arrow-icon  w-auto h-auto"  width={50} height={50} />
+            <Image src="/hide.png" alt="hide" className="absolute -right-5 z-40 bottom-1/2 w-auto h-auto" width={150} height={150} />
           </div>
           <div className="door door-right"></div>
         </div>
@@ -100,16 +112,16 @@ export default function Home() {
       ) : (
         // Main Wishes Section
         <main className="text-center w-full h-dvh overflow-y-auto relative pb-[100px]">
-            {/* <div className="h-[80px] w-[300px] mx-auto mb-2">
-
-            </div> */}
+            {/* <a href="https://luglawhaulsano.net/4/7441732" className="h-[80px] w-[300px] mx-auto mb-2">
+                dddd
+            </a> */}
            {/* Hidden audio element */}
        <AudioToggle audioSrc="/4.mp3" isPlaying={musicPlaying}
               onToggle={toggleMusic} />
 
         {/* fireworks  */}
-        <Image src="/stars.gif" alt="wishing you"  className="w-[100px] md:w-[300px] fixed left-10 z-0" width={500} height={500} />
-        <Image src="/stars.gif" alt="wishing you"  className="w-[100px] md:w-[300px] fixed right-5 top-10 md:bottom-10 z-0" width={500} height={500} />
+        <Image src="/stars.gif" alt="wishing you" unoptimized="true" className="w-[100px] md:w-[300px] fixed left-10 z-0" width={500} height={500} />
+        <Image src="/stars.gif" alt="wishing you" unoptimized="true" className="w-[100px] md:w-[300px] fixed right-5 top-10 md:bottom-10 z-0" width={500} height={500} />
 
         <div className="w-[30px] md:w-[50px] h-[100dvh] fixed left-0 top-0">
         {/* <LeftSlider /> */}

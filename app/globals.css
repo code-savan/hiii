@@ -217,6 +217,10 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     animation: pulse-animation 2s ease-in-out infinite; /* Define the animation */
   }
 
+  .hide-icon {
+    margin: 0;
+  }
+
 
   @keyframes pulse-animation {
     0% {
