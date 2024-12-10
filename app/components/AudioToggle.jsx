@@ -20,7 +20,7 @@ const AudioToggle = ({ audioSrc }) => {
       <audio ref={audioRef} src={audioSrc} loop preload="auto" autoPlay />
       <button
         onClick={handleToggleAudio}
-        className="fixed bottom-16 right-5 bg-gray-700 text-white rounded-full px-4 py-3 shadow-lg hover:bg-red-600 transition z-50"
+        className="fixed bottom-16 right-5 bg-gray-500 text-white rounded-full px-4 py-3 shadow-lg animate-scaleSequence hover:bg-red-600 transition z-50"
         aria-label="Toggle audio"
       >
         {isPlaying ? "🔇" : "🔊"}
