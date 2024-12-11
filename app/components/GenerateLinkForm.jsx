@@ -1,8 +1,12 @@
 const GenerateLinkForm = ({ onSubmit, newName, setNewName }) => (
     <form
       onSubmit={onSubmit}
-      className="w-full z-40 flex items-center fixed bottom-0 left-1/2 -translate-x-1/2"
+      className="w-full z-40 fixed bottom-0 left-1/2 -translate-x-1/2"
     >
+        <div className="backdrop-blur-md w-fit px-3 md:px-16 mx-auto">
+            <p className="text-slate-800 font-bold">Send this to Someone Special...❤️❤️</p>
+        </div>
+        <div className="flex items-center w-full">
       <input
         type="text"
         placeholder="Enter your name here..."
@@ -16,6 +20,7 @@ const GenerateLinkForm = ({ onSubmit, newName, setNewName }) => (
       >
         ‮O‮G👉
       </button>
+        </div>
     </form>
   );
 

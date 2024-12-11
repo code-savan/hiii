@@ -8,14 +8,20 @@ import AnimatedSidebar from "./components/AnimatedSidebar";
 import CountdownTimer from "./components/CountdownTimer";
 import AudioToggle from "./components/AudioToggle";
 import GenerateLinkForm from "./components/GenerateLinkForm";
+import Modal from "./components/Modal";
 
 
 export default function Home() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSharing, setIsSharing] = useState(false);
   const [isClicked, setIsClicked] = useState(false); // Manage loader visibility
   const [userName, setUserName] = useState(""); // Name in the query parameters
   const [newName, setNewName] = useState(""); // Name entered in the form
   const [isDoorOpen, setIsDoorOpen] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false); // State for music play/pause
+
+
+
 
 
 
@@ -52,16 +58,38 @@ useEffect(() => {
 
       try {
         await navigator.clipboard.writeText(customMessage);
-        alert("Your message has been copied!!! Share to Friends NOW!!!");
+        setIsModalOpen(true);
+        // alert("Your message has been copied!!! Share to Friends NOW!!!");
       } catch (error) {
         console.error("Failed to copy text:", error);
         alert("Could not copy the message. Please try again.");
       }
 
 
-      // 2. Share to WhatsApp
-      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(customMessage)}`;
-      window.open(whatsappUrl, "_blank");
+      // 2. Share to...
+        // setMessages([
+        //     {
+        //         link: `https://api.whatsapp.com/send?text=${encodeURIComponent(customMessage)}`,
+        //         src: "/whatsapp.png"
+        //     },
+        //     {
+        //         link: `https://wa.me/?text=${encodeURIComponent(customMessage)}`,
+        //         src: "/whatsapp_business.png"
+        //     },
+        //     {
+        //         link: `https://www.snapchat.com/scan?attachmentUrl=${encodeURIComponent(customUrl)}`,
+        //         src: "/snapchat.png"
+        //     },
+        //     {
+        //         link: `https://www.instagram.com/`,
+        //         src: "/instagram.png"
+        //     },
+        //     {
+        //         link: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(customUrl)}`,
+        //         src: "/facebook.png"
+        //     },
+        //   ])
+
 
       setNewName("");
     }
@@ -75,6 +103,16 @@ useEffect(() => {
   const handleClick = () => {
     setIsDoorOpen(true);
     setTimeout(() => setIsClicked(true), 1000);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setIsSharing(false)
+};
+//   const handleContinue = () => console.log("Continue button clicked!");
+  const handleContinue = () => {
+    setIsSharing(true);
+    // onContinue(); // Callback to handle state changes or additional logic
   };
 
   return (
@@ -120,8 +158,8 @@ useEffect(() => {
               onToggle={toggleMusic} />
 
         {/* fireworks  */}
-        <Image src="/stars.gif" alt="wishing you" unoptimized="true" className="w-[100px] md:w-[300px] fixed left-10 z-0" width={500} height={500} />
-        <Image src="/stars.gif" alt="wishing you" unoptimized="true" className="w-[100px] md:w-[300px] fixed right-5 top-10 md:bottom-10 z-0" width={500} height={500} />
+        <Image src="/stars.gif" alt="fireworks" unoptimized="true" className="w-[100px] md:w-[300px] fixed left-10 z-0" width={500} height={500} />
+        <Image src="/stars.gif" alt="fireworks" unoptimized="true" className="w-[100px] md:w-[300px] fixed right-5 top-10 md:bottom-10 z-0" width={500} height={500} />
 
         <div className="w-[30px] md:w-[50px] h-[100dvh] fixed left-0 top-0">
         {/* <LeftSlider /> */}
@@ -188,6 +226,13 @@ useEffect(() => {
             </button>
           </form> */}
           <GenerateLinkForm onSubmit={handleGenerateLink} newName={newName} setNewName={setNewName} />
+          <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        handleContinue={handleContinue}
+        isSharing={isSharing}
+        userName={userName}
+      />
         </main>
       )}
     </div>
